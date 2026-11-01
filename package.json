@@ -1,0 +1,22 @@
+{
+  "name": "web-uptime-monitor",
+  "version": "1.2.0",
+  "description": "Synthetic browser monitoring and automated endpoint health checking",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/monitor.test.js"
+  },
+  "keywords": [
+    "uptime",
+    "synthetic-monitoring",
+    "playwright",
+    "healthcheck",
+    "devops"
+  ],
+  "author": "jeffreykeller0321",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
