@@ -1,3 +1,5 @@
+# Scheduled synthetic availability probe
+# Re-committed to register the cron schedule with GitHub Actions
 name: Synthetic Probe
 
 on:
