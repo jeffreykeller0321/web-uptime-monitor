@@ -3,7 +3,7 @@
  */
 function loadConfig() {
   const targetUrl = process.env.TARGET_URL || "";
-  const timeoutMs = parseInt(process.env.TIMEOUT_MS || "120000", 10);
+  const timeoutMs = parseInt(process.env.TIMEOUT_MS || "300000", 10);
   const headless = process.env.HEADLESS !== "false";
 
   return {
