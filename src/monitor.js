@@ -59,6 +59,12 @@ async function runMonitor(config) {
 
         const body = (await page.innerText("body")) || "";
         const hasCore = body.includes('"http":"ok"') && body.includes('"redis":true');
+        const isAsleepGate = body.includes('"status":"asleep"');
+        if (isAsleepGate && !isGatewayWaking) {
+          console.log('[probe] Blitz sleep gate detected (200 + asleep body). Holding visit to wake app...');
+          await page.waitForTimeout(8000);
+          continue;
+        }
         if (status === 200 && hasCore) {
           const elapsed = Date.now() - startTime;
           console.log(`[probe] SUCCESS: Verified response in ${elapsed}ms`);
@@ -76,7 +82,8 @@ async function runMonitor(config) {
   }
 
   if (!verified) {
-    throw new Error("Target failed to verify within the configured timeout window");
+    const lastBody = (await page.innerText("body").catch(() => "")) || "";
+    throw new Error(`Target failed to verify within the configured timeout window; last body: ${lastBody.slice(0, 200)}`);
   }
 
   return { verified, duration: Date.now() - startTime };
